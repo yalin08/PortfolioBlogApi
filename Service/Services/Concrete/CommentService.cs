@@ -9,19 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.Repositories.Interface;
 
 namespace Business.Services.Concrete
 {
     public class CommentService : ICommentService
     {
-        private readonly CommentRepo _commentRepo;
-        private readonly PostRepo _postRepo;
+        private readonly ICommentRepo _commentRepo;
         private readonly IMapper _mapper;
 
-        public CommentService(CommentRepo commentRepo, PostRepo postRepo, IMapper mapper)
+        public CommentService(ICommentRepo commentRepo, IMapper mapper)
         {
             _commentRepo = commentRepo;
-            _postRepo = postRepo;
             _mapper = mapper;
         }
 

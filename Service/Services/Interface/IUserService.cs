@@ -12,7 +12,6 @@ namespace Business.Services.Interface
     {
         Task<SignInResult> Login(LoginDto model);
         Task<IdentityResult> Register(RegisterDto model);
-
         Task LogOut();
     }
 }

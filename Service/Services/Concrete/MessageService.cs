@@ -8,15 +8,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.Repositories.Interface;
 
 namespace Business.Services.Concrete
 {
     public class MessageService:IMessageService
     {
-        private readonly MessageRepo _messageRepo;
+        private readonly IMessageRepo _messageRepo;
         private readonly IMapper _mapper;
 
-        public MessageService(MessageRepo messageRepo,IMapper mapper)
+        public MessageService(IMessageRepo messageRepo,IMapper mapper)
         {
             _messageRepo = messageRepo;
             _mapper = mapper;
