@@ -9,7 +9,7 @@ namespace Service.Services.Interface
 {
     public interface IPostService
     {
-        Task CreatePost(CreatePostDto dto);
+        Task CreatePost(PostDto dto);
         Task<PostDto> GetPostById(int id);
         Task<List<PostDto>> GetPosts();
         Task<List<PostDto>> GetPosts(int page, int pageSize);

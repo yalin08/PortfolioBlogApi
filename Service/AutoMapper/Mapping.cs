@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Infrastructure.Entities.Concrete;
 using Service.Dto.Comment;
+using Service.Dto.Message;
 using Service.Dto.Post;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ namespace Service.AutoMapper
         public Mapping()
         {
             //CreateMap<T,T>().ReverseMap();
-            CreateMap<CreatePostDto,Post>().ReverseMap();
             CreateMap<PostDto,Post>().ReverseMap();
+            CreateMap<MessageDto,Message>().ReverseMap();
             CreateMap<CommentDto, Comment>().ReverseMap();
         }
     }

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Dto.Comment
+namespace Service.Dto.Message
 {
-    public class CommentDto
+    public class MessageDto
     {
+        public string Sender { get; set; }
         public string Title { get; set; }
-        public string Message { get; set; }
+        public string Text { get; set; }
         public DateTime PostedDate { get; set; }
-        public int PostId { get; set; }
+
     }
 }

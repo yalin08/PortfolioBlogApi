@@ -28,8 +28,9 @@ namespace Service.Services.Concrete
 
         public async Task CreateComment(CommentDto model)
         {
-            var dto = _mapper.Map<Comment>(model);
-            await _commentRepo.Create(dto);
+            var com = _mapper.Map<Comment>(model);
+            com.PostedDate = DateTime.Now;
+            await _commentRepo.Create(com);
         }
 
         public async Task<List<CommentDto>> GetCommentByPostId(int postId)

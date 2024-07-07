@@ -25,10 +25,10 @@ namespace Service.Services.Concrete
 
 
 
-        public async Task CreatePost(CreatePostDto dto)
+        public async Task CreatePost(PostDto dto)
         {
             Post post = _mapper.Map<Post>(dto);
-
+            post.PostedDate = DateTime.Now;
             await _postRepo.Create(post);
         }
 
