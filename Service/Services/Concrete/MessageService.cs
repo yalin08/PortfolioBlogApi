@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using Infrastructure.Entities.Concrete;
 using Infrastructure.Repositories.Concrete;
-using Service.Dto.Message;
-using Service.Services.Interface;
+using Business.Dto.Message;
+using Business.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Services.Concrete
+namespace Business.Services.Concrete
 {
     public class MessageService:IMessageService
     {

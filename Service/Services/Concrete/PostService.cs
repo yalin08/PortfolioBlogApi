@@ -2,15 +2,15 @@
 using Infrastructure.Entities.Concrete;
 using Infrastructure.Repositories.Concrete;
 using Microsoft.EntityFrameworkCore;
-using Service.Dto.Post;
-using Service.Services.Interface;
+using Business.Dto.Post;
+using Business.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Services.Concrete
+namespace Business.Services.Concrete
 {
     public class PostService : IPostService
     {

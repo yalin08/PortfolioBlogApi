@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioBlogApi", "Portfol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{B15CEE6C-5BEA-469B-9CB7-1E62FCB749A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{AC576FA4-E74D-461E-B055-0BFBE2A8A635}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Service\Business.csproj", "{AC576FA4-E74D-461E-B055-0BFBE2A8A635}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

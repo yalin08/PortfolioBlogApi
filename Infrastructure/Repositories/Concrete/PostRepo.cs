@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Context;
 using Infrastructure.Entities.Concrete;
 using Infrastructure.Repositories.Abstract;
+using Infrastructure.Repositories.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Concrete
 {
-    public class PostRepo : BaseRepo<Post>
+    public class PostRepo : BaseRepo<Post>,IPostRepo
     {
         public PostRepo(AppDbContext context) : base(context)
         {

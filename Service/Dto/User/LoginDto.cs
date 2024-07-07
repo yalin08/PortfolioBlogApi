@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Dto.User
+namespace Business.Dto.User
 {
     public class LoginDto
     {

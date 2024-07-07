@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Dto.Message
+namespace Business.Dto.Message
 {
     public class MessageDto
     {
