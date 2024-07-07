@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Entities.Concrete;
+using Infrastructure.EntityTypeConfiguration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +29,7 @@ namespace Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            builder.ApplyConfiguration(new UserConfig());
 
             base.OnModelCreating(builder);
         }
