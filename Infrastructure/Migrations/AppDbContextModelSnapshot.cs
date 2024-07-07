@@ -330,6 +330,24 @@ namespace Infrastructure.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.HasDiscriminator().HasValue("AppUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2f81659b-a7a5-4518-afdb-3fba49a756f1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c91fca87-c37c-4f78-857c-9c13bf7904a7",
+                            Email = "yalintuzmen08@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "YALINTUZMEN08@GMAIL.COM",
+                            NormalizedUserName = "Y3ALINT1UZMEN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH0FOfp3qwYpk9F0kXNMjcYKTDkGg433cKtVUL9GRP2vpMQTpP9nML7VpkxNIgAwFA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2aab9e9f-d75c-4b4a-9875-7dc25274e339",
+                            TwoFactorEnabled = false,
+                            UserName = "y3alint1uzmen"
+                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Concrete.Comment", b =>

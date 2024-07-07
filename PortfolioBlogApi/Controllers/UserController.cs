@@ -26,20 +26,20 @@ namespace PortfolioBlogApi.Controllers
             _configuration = config;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _userService.Register(model);
-            if (result.Succeeded)
-            {
-                return Ok(new { message = "User registered successfully" });
-            }
-            return BadRequest(new { message = "User registration failed" });
-        }
+        //[HttpPost("register")]
+        //public async Task<IActionResult> Register(RegisterDto model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var result = await _userService.Register(model);
+        //    if (result.Succeeded)
+        //    {
+        //        return Ok(new { message = "User registered successfully" });
+        //    }
+        //    return BadRequest(new { message = "User registration failed" });
+        //}
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto model)

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace PortfolioBlogApi
 {
@@ -118,7 +119,8 @@ namespace PortfolioBlogApi
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsProduction())
+            
+           // if (app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options=>
@@ -130,11 +132,7 @@ namespace PortfolioBlogApi
                    
                 ;
             }
-            else if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+          
 
             app.UseHttpsRedirection();
 
