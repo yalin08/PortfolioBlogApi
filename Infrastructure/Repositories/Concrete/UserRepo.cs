@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Concrete
 {
-    public class UserRepo : BaseRepo<AppUser>,IUserRepo
+    public class UserRepo:IUserRepo
     {
-        public UserRepo(AppDbContext context) : base(context)
-        {
-        }
+
     }
 }

@@ -11,7 +11,7 @@ namespace Infrastructure.Repositories.Interface
 {
     public interface IBaseRepo<T> where T : class
     {
-        Task Create(T entity);
+        Task<T> Create(T entity);
         Task Update(T entity);
         Task Delete(T entity);
 

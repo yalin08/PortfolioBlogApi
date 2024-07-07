@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Abstract
 {
-    public abstract class BaseRepo<T> : IBaseRepo<T> where T : class
+    public abstract class BaseRepo<T> : IBaseRepo<T> where T : BaseEntity
     {
 
         private readonly AppDbContext _context;
@@ -28,16 +28,22 @@ namespace Infrastructure.Repositories.Abstract
             return await _table.AnyAsync(expression);
         }
 
-        public async virtual Task Create(T entity)
+        public async Task<T> Create(T entity)
         {
-            await _table.AddAsync(entity);
+
+           var addedEntity= await _table.AddAsync(entity);
             await _context.SaveChangesAsync();
+
+            return entity;
         }
 
         public async Task Delete(T entity)
         {
-            // await _table.RemoveAsync(entity); => RemoveAsync metodu bulunmuyor
-            _context.Entry(entity).State = EntityState.Deleted;
+            if (entity == null)
+                return;
+
+            entity.IsActive = false;
+            _context.Update<T>(entity);
             await _context.SaveChangesAsync();
         }
 
@@ -66,6 +72,9 @@ namespace Infrastructure.Repositories.Abstract
 
         public async Task Update(T entity)
         {
+            if (entity == null)
+                return;
+
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }

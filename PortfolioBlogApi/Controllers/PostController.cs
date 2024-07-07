@@ -1,5 +1,6 @@
 ﻿using Business.Dto.Post;
 using Business.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace PortfolioBlogApi.Controllers
         }
 
         [HttpPost("CreatePost")]
+        [Authorize]
         public async Task<IActionResult> CreatePost(PostDto dto)
         {
             await _service.CreatePost(dto);

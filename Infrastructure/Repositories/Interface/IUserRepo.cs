@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Interface
 {
-    public interface IUserRepo:IBaseRepo<AppUser>
+    public interface IUserRepo
     {
     }
 }

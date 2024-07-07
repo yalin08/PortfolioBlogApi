@@ -25,16 +25,33 @@ namespace Business.Services.Concrete
         }
 
 
-        public async Task CreateComment(CommentDto model)
+        public async Task<bool> DeleteComment(int id)
+        {
+            var comment = await _commentRepo.GetDefault(x => x.Id == id );
+            if (comment != null)
+            {
+                await _commentRepo.Delete(comment);
+                return true;
+            }
+                return false;
+        }
+
+
+        public async Task<bool> CreateComment(CommentDto model)
         {
             var com = _mapper.Map<Comment>(model);
             com.PostedDate = DateTime.Now;
-            await _commentRepo.Create(com);
+            var created= await _commentRepo.Create(com);
+            if (created != null)
+                return true;
+          
+
+                return false;
         }
 
         public async Task<List<CommentDto>> GetCommentByPostId(int postId)
         {
-            var comments = await _commentRepo.GetDefaults(x => x.PostId == postId);
+            var comments = await _commentRepo.GetDefaults(x => x.PostId == postId && x.IsActive);
             var dtos = comments.Select(p => _mapper.Map<CommentDto>(p)).ToList();
             return dtos;
         }

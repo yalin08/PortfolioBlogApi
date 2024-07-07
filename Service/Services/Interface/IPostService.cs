@@ -9,8 +9,11 @@ namespace Business.Services.Interface
 {
     public interface IPostService
     {
-        Task CreatePost(PostDto dto);
+        Task<bool> CreatePost(PostDto dto);
         Task<PostDto> GetPostById(int id);
+
+        Task<bool> DeletePost(int id);
+
         Task<List<PostDto>> GetPosts();
         Task<List<PostDto>> GetPosts(int page, int pageSize);
     }

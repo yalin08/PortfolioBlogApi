@@ -9,7 +9,8 @@ namespace Business.Services.Interface
 {
     public interface ICommentService
     {
-        Task CreateComment(CommentDto model);
+        Task<bool> CreateComment(CommentDto model);
+        Task<bool> DeleteComment(int id);
         Task<List<CommentDto>> GetCommentByPostId(int postId);
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Repositories.Interface;
+using Autofac.Core;
 
 namespace Business.Services.Concrete
 {
@@ -26,16 +27,34 @@ namespace Business.Services.Concrete
 
 
 
-        public async Task CreatePost(PostDto dto)
+        public async Task<bool> CreatePost(PostDto dto)
         {
             Post post = _mapper.Map<Post>(dto);
             post.PostedDate = DateTime.Now;
-            await _postRepo.Create(post);
+         var created=   await _postRepo.Create(post);
+            if(created!=null)
+                return true;
+
+
+            return false;
+        }
+
+        public async Task<bool> DeletePost(int id)
+        {
+            var post= await _postRepo.GetDefault(x => x.Id == id);
+            if (post != null)
+            {
+                await _postRepo.Delete(post);
+                return true;
+            }
+            return false;
+
+           
         }
 
         public async Task<PostDto> GetPostById(int id)
         {
-            var post = await _postRepo.GetDefault(x=>x.Id==id);
+            var post = await _postRepo.GetDefault(x=>x.Id==id && x.IsActive);
 
             var dto = _mapper.Map<PostDto>(post);
 
@@ -45,7 +64,7 @@ namespace Business.Services.Concrete
 
         public async Task<List<PostDto>> GetPosts()
         {
-            var posts = await _postRepo.GetDefaults(x => true);
+            var posts = await _postRepo.GetDefaults(x => x.IsActive);
 
             var dtos = posts.Select(p => new PostDto
             {
@@ -68,7 +87,7 @@ namespace Business.Services.Concrete
             if (pageSize < 1) pageSize = 10;
             var skip = (page - 1) * pageSize;
 
-            var posts = await _postRepo.GetDefaults(x => true);
+            var posts = await _postRepo.GetDefaults(x =>  x.IsActive);
 
             var dtos = posts.Skip(skip).Take(pageSize).Select(p => _mapper.Map<PostDto>(p))
                 .ToList();

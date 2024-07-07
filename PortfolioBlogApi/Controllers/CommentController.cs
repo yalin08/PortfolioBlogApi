@@ -5,6 +5,7 @@ using Business.Dto.Post;
 using Business.Services.Interface;
 using Infrastructure.Repositories.Concrete;
 using Infrastructure.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,20 @@ namespace PortfolioBlogApi.Controllers
         {
           var dto=await  _service.GetCommentByPostId(postId);
             return dto;
+        }
+
+        [HttpDelete("DeleteComment")]
+        [Authorize]
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+          bool success=  await _service.DeleteComment(id);
+
+            if(success)
+            {
+                return Ok("Deleted");
+            }
+            return BadRequest();
+
         }
 
 

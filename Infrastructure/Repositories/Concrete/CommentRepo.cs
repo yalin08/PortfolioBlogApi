@@ -15,5 +15,7 @@ namespace Infrastructure.Repositories.Concrete
         public CommentRepo(AppDbContext context) : base(context)
         {
         }
+
+
     }
 }

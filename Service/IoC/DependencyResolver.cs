@@ -14,7 +14,6 @@ namespace Business.IoC
         protected override void Load(ContainerBuilder builder)
         {
 
-            builder.RegisterType<UserRepo>().As<IUserRepo>().InstancePerLifetimeScope();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
 
             builder.RegisterType<CommentRepo>().As<ICommentRepo>().InstancePerLifetimeScope();
