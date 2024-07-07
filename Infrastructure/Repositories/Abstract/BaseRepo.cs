@@ -46,7 +46,7 @@ namespace Infrastructure.Repositories.Abstract
             return await _table.FirstOrDefaultAsync(expression);
         }
 
-        public async Task<List<T>> GetDefaults(Expression<Func<T, bool>> expression=null)
+        public async Task<List<T>> GetDefaults(Expression<Func<T, bool>> expression)
         {
             return await _table.Where(expression).ToListAsync();
         }

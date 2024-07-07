@@ -15,8 +15,8 @@ namespace Infrastructure.Repositories.Interface
         Task Update(T entity);
         Task Delete(T entity);
 
-        Task<T> GetDefault(Expression<Func<T, bool>> expression);
-        Task<List<T>> GetDefaults(Expression<Func<T, bool>> expression);
+        Task<T> GetDefault(Expression<Func<T, bool>> expression = null);
+        Task<List<T>> GetDefaults(Expression<Func<T, bool>> expression=null);
         Task<T> GetDefaultIncluding(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includes);
         Task<bool> Any(Expression<Func<T, bool>> expression);
 

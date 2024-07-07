@@ -11,9 +11,9 @@ namespace PortfolioBlogApi.Controllers
     {
         private readonly IPostService _service;
 
-        public PostController(IPostService service)
+        public PostController(IPostService postService)
         {
-            _service = service;
+            _service = postService;
         }
 
         [HttpPost("CreatePost")]
@@ -32,13 +32,13 @@ namespace PortfolioBlogApi.Controllers
 
 
         [HttpGet("GetAll")]
-        public async Task<List<PostDto>> GetAllJobs()
+        public async Task<List<PostDto>> GetPosts()
         {
             var posts = await _service.GetPosts();
             return posts;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("GetAllPagination")]
         public async Task<List<PostDto>> GetPosts(int page, int pageSize)
         {
             var posts = await _service.GetPosts(page, pageSize);

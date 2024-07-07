@@ -13,12 +13,12 @@ namespace Infrastructure.Entities.Concrete
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
-        public List<Comment>  Comments { get; set; }
+        public List<Comment>?  Comments { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public AppUser AppUser { get; set; }
+        public AppUser? AppUser { get; set; }
 
     }
 }

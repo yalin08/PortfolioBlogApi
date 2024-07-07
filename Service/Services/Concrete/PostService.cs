@@ -9,15 +9,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Infrastructure.Repositories.Interface;
 
 namespace Business.Services.Concrete
 {
     public class PostService : IPostService
     {
-        private readonly PostRepo _postRepo;
+        private readonly IPostRepo _postRepo;
         private readonly IMapper _mapper;
 
-        public PostService(PostRepo postRepo, IMapper mapper)
+        public PostService(IPostRepo postRepo, IMapper mapper)
         {
             _postRepo = postRepo;
             _mapper = mapper;
@@ -44,7 +45,7 @@ namespace Business.Services.Concrete
 
         public async Task<List<PostDto>> GetPosts()
         {
-            var posts = await _postRepo.GetDefaults();
+            var posts = await _postRepo.GetDefaults(x => true);
 
             var dtos = posts.Select(p => new PostDto
             {
@@ -67,7 +68,7 @@ namespace Business.Services.Concrete
             if (pageSize < 1) pageSize = 10;
             var skip = (page - 1) * pageSize;
 
-            var posts = await _postRepo.GetDefaults();
+            var posts = await _postRepo.GetDefaults(x => true);
 
             var dtos = posts.Skip(skip).Take(pageSize).Select(p => _mapper.Map<PostDto>(p))
                 .ToList();

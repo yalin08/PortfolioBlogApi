@@ -27,8 +27,6 @@ namespace Business.IoC
             builder.RegisterType<MessageService>().As<IMessageService>().InstancePerLifetimeScope();
 
 
-
-
             builder.Register(context => new MapperConfiguration(config =>
             {
                 // Register Mapper Profile

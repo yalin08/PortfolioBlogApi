@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Concrete
 {
-    public class PostRepo : BaseRepo<Post>,IPostRepo
+    public class PostRepo : BaseRepo<Post>, IPostRepo
     {
         public PostRepo(AppDbContext context) : base(context)
         {

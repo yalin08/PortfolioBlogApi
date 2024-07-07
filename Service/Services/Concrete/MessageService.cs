@@ -31,7 +31,7 @@ namespace Business.Services.Concrete
 
         public async Task<List<MessageDto>>  GetAllMessages()
         {
-           var messages=await _messageRepo.GetDefaults();
+           var messages=await _messageRepo.GetDefaults(x => true);
             var dtos = messages.Select(x => _mapper.Map<MessageDto>(x)).ToList();
             return dtos;
         }

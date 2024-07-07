@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.Dto.User;
 
 namespace Business.AutoMapper
 {
@@ -17,6 +18,10 @@ namespace Business.AutoMapper
         {
             //CreateMap<T,T>().ReverseMap();
             CreateMap<PostDto,Post>().ReverseMap();
+
+            CreateMap<AppUser, RegisterDto>().ReverseMap();
+            CreateMap<AppUser, LoginDto>().ReverseMap();
+
             CreateMap<MessageDto,Message>().ReverseMap();
             CreateMap<CommentDto, Comment>().ReverseMap();
         }
