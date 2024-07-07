@@ -120,7 +120,7 @@ namespace PortfolioBlogApi
 
             // Configure the HTTP request pipeline.
             
-           // if (app.Environment.IsProduction())
+         //  if (app.Environment.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options=>
@@ -128,12 +128,10 @@ namespace PortfolioBlogApi
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogAPI");
                     options.RoutePrefix=string.Empty;
                 }
-                )
-                   
-                ;
+                );
             }
-          
 
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
