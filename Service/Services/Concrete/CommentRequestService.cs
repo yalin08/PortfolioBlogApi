@@ -25,7 +25,7 @@ namespace Business.Services.Concrete
         public async Task<bool> CreateCommentRequest(CreateCommentRequestDto dto)
         {
             var model=_mapper.Map<CommentRequest>(dto);
-            model.PostedDate = DateTime.Now;
+            model.PostedDate = DateTime.UtcNow;
             var created = await _commentRequestRepo.Create(model);
             if (created != null)
                 return true;

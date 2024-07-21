@@ -30,7 +30,7 @@ namespace Business.Services.Concrete
         public async Task<bool> CreatePost(CreatePostDto dto)
         {
             Post post = _mapper.Map<Post>(dto);
-            post.PostedDate = DateTime.Now;
+            post.PostedDate = DateTime.UtcNow;
             var created = await _postRepo.Create(post);
             if (created != null)
                 return true;

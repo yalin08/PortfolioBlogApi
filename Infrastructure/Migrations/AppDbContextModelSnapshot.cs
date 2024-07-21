@@ -386,17 +386,17 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1bfe082d-75bc-438f-8b97-dd5e1f2ba900",
+                            Id = "f68621bb-1545-43b6-b0b2-c662f38cb33f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "26abe14c-64e9-4cf9-abef-c37193a664b4",
+                            ConcurrencyStamp = "c356c50a-51f1-4cad-b95b-212a6c0ddaa5",
                             Email = "yalintuzmen08@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "YALINTUZMEN08@GMAIL.COM",
                             NormalizedUserName = "Y3ALINT1UZMEN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGWY7ttsTsvCrXdNG3fxf1463TvrpWCQm1svAGyUlGJFcdILPkHzgoEduMluR1DVNA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBSAnOEhcmWY8JOg+wJ3DId8JGR0Z5qGw5QV0vPJEdTw/bJzwx/K/hWN69zUh3MKYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "647a7736-eff2-4f7e-9d4b-e85db4ca1ba3",
+                            SecurityStamp = "08f7cba3-2d85-45f0-9e09-0e0e57afdd4d",
                             TwoFactorEnabled = false,
                             UserName = "y3alint1uzmen"
                         });
