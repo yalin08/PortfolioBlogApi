@@ -64,7 +64,7 @@ namespace PortfolioBlogApi
                 {
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    ValidateLifetime = true,
+                    ValidateLifetime = false,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings["validIssuer"],
                     ValidAudience = jwtSettings["validAudience"],
@@ -132,20 +132,25 @@ namespace PortfolioBlogApi
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            
-         //  if (app.Environment.IsProduction())
+
+            //  if (app.Environment.IsProduction())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(options=>
+                app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogAPI");
-                    options.RoutePrefix=string.Empty;
+                    options.RoutePrefix = string.Empty;
                 }
                 );
             }
 
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseCors("AllowAllOrigins");
+
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -8,8 +8,12 @@ namespace Business.Dto.Post
 {
     public class PostDto
     {
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public DateTime PostedDate { get; set; }
+
+
+        public int Id { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Title { get; set; }
+        public string? Content { get; set; }
+        public DateTime? PostedDate { get; set; }
     }
 }

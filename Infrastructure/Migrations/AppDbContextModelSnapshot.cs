@@ -47,6 +47,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SenderIp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -56,6 +60,46 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Concrete.CommentRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PostedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderIp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("CommentRequests");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Concrete.Message", b =>
@@ -73,6 +117,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderIp")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -98,6 +146,10 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -334,17 +386,17 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2f81659b-a7a5-4518-afdb-3fba49a756f1",
+                            Id = "1bfe082d-75bc-438f-8b97-dd5e1f2ba900",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c91fca87-c37c-4f78-857c-9c13bf7904a7",
+                            ConcurrencyStamp = "26abe14c-64e9-4cf9-abef-c37193a664b4",
                             Email = "yalintuzmen08@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "YALINTUZMEN08@GMAIL.COM",
                             NormalizedUserName = "Y3ALINT1UZMEN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH0FOfp3qwYpk9F0kXNMjcYKTDkGg433cKtVUL9GRP2vpMQTpP9nML7VpkxNIgAwFA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGWY7ttsTsvCrXdNG3fxf1463TvrpWCQm1svAGyUlGJFcdILPkHzgoEduMluR1DVNA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2aab9e9f-d75c-4b4a-9875-7dc25274e339",
+                            SecurityStamp = "647a7736-eff2-4f7e-9d4b-e85db4ca1ba3",
                             TwoFactorEnabled = false,
                             UserName = "y3alint1uzmen"
                         });
@@ -354,6 +406,17 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Infrastructure.Entities.Concrete.Post", "Post")
                         .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Concrete.CommentRequest", b =>
+                {
+                    b.HasOne("Infrastructure.Entities.Concrete.Post", "Post")
+                        .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories.Interface
     public interface IBaseRepo<T> where T : class
     {
         Task<T> Create(T entity);
-        Task Update(T entity);
+        Task<T> Update(T entity);
         Task Delete(T entity);
 
         Task<T> GetDefault(Expression<Func<T, bool>> expression = null);

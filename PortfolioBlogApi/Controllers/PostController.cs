@@ -19,9 +19,17 @@ namespace PortfolioBlogApi.Controllers
 
         [HttpPost("CreatePost")]
         [Authorize]
-        public async Task<IActionResult> CreatePost(PostDto dto)
+        public async Task<IActionResult> CreatePost(CreatePostDto dto)
         {
             await _service.CreatePost(dto);
+            return Ok(dto);
+        }
+
+        [HttpPut("UpdatePost")]
+        [Authorize]
+        public async Task<IActionResult> UpdatePost(PostDto dto)
+        {
+            await _service.UpdatePost(dto);
             return Ok(dto);
         }
 
@@ -30,6 +38,14 @@ namespace PortfolioBlogApi.Controllers
         {
             var post=await _service.GetPostById(id);
             return post;
+        }
+
+        [HttpGet("GetCount")]
+        public async Task<int> GetCount()
+        {
+            var posts = await _service.GetPosts();
+
+            return posts.Count;
         }
 
 

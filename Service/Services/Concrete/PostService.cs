@@ -27,21 +27,56 @@ namespace Business.Services.Concrete
 
 
 
-        public async Task<bool> CreatePost(PostDto dto)
+        public async Task<bool> CreatePost(CreatePostDto dto)
         {
             Post post = _mapper.Map<Post>(dto);
             post.PostedDate = DateTime.Now;
-         var created=   await _postRepo.Create(post);
-            if(created!=null)
+            var created = await _postRepo.Create(post);
+            if (created != null)
                 return true;
 
 
             return false;
         }
 
+
+        public async Task<bool> UpdatePost(PostDto dto)
+        {
+            if (dto != null)
+            {
+                var post = await _postRepo.GetDefault(x=>x.Id==dto.Id);
+
+                if (post == null)
+                {
+                    return false;
+                }
+
+                if (dto.ImageUrl != null)
+                {
+                    post.ImageUrl = dto.ImageUrl;
+                }
+
+                if (dto.Title != null)
+                {
+                    post.Title = dto.Title;
+                }
+
+                if (dto.Content != null)
+                {
+                    post.Content = dto.Content;
+                }
+
+                await _postRepo.Update(post);
+                return true;
+
+            }
+            return false;
+        }
+
+
         public async Task<bool> DeletePost(int id)
         {
-            var post= await _postRepo.GetDefault(x => x.Id == id);
+            var post = await _postRepo.GetDefault(x => x.Id == id);
             if (post != null)
             {
                 await _postRepo.Delete(post);
@@ -49,12 +84,12 @@ namespace Business.Services.Concrete
             }
             return false;
 
-           
+
         }
 
         public async Task<PostDto> GetPostById(int id)
         {
-            var post = await _postRepo.GetDefault(x=>x.Id==id && x.IsActive);
+            var post = await _postRepo.GetDefault(x => x.Id == id && x.IsActive);
 
             var dto = _mapper.Map<PostDto>(post);
 
@@ -66,15 +101,9 @@ namespace Business.Services.Concrete
         {
             var posts = await _postRepo.GetDefaults(x => x.IsActive);
 
-            var dtos = posts.Select(p => new PostDto
-            {
-
-                Title = p.Title,
-                Content = p.Content,
-                PostedDate = p.PostedDate,
-
-            })
+            var dtos = posts.Select(p => _mapper.Map<PostDto>(p)).OrderByDescending(x=>x.PostedDate)
                 .ToList();
+
 
 
             return dtos;
@@ -87,9 +116,9 @@ namespace Business.Services.Concrete
             if (pageSize < 1) pageSize = 10;
             var skip = (page - 1) * pageSize;
 
-            var posts = await _postRepo.GetDefaults(x =>  x.IsActive);
+            var posts = await _postRepo.GetDefaults(x => x.IsActive);
 
-            var dtos = posts.Skip(skip).Take(pageSize).Select(p => _mapper.Map<PostDto>(p))
+            var dtos = posts.OrderByDescending(x => x.PostedDate).Skip(skip).Take(pageSize).Select(p => _mapper.Map<PostDto>(p))
                 .ToList();
 
 

@@ -19,11 +19,18 @@ namespace Business.IoC
             builder.RegisterType<CommentRepo>().As<ICommentRepo>().InstancePerLifetimeScope();
             builder.RegisterType<CommentService>().As<ICommentService>().InstancePerLifetimeScope();
 
+
+            builder.RegisterType<CommentRequestRepo>().As<ICommentRequestRepo>().InstancePerLifetimeScope();
+            builder.RegisterType<CommentRequestService>().As<ICommentRequestService>().InstancePerLifetimeScope();
+
             builder.RegisterType<PostRepo>().As<IPostRepo>().InstancePerLifetimeScope();
             builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
 
             builder.RegisterType<MessageRepo>().As<IMessageRepo>().InstancePerLifetimeScope();
             builder.RegisterType<MessageService>().As<IMessageService>().InstancePerLifetimeScope();
+
+
+
 
 
             builder.Register(context => new MapperConfiguration(config =>

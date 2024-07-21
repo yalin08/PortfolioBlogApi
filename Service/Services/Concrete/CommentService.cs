@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Repositories.Interface;
+using Business.Dto.CommentRequest;
 
 namespace Business.Services.Concrete
 {
@@ -37,10 +38,9 @@ namespace Business.Services.Concrete
         }
 
 
-        public async Task<bool> CreateComment(CommentDto model)
+        public async Task<bool> CreateComment(CommentRequestDto model)
         {
             var com = _mapper.Map<Comment>(model);
-            com.PostedDate = DateTime.Now;
             var created= await _commentRepo.Create(com);
             if (created != null)
                 return true;
@@ -53,8 +53,17 @@ namespace Business.Services.Concrete
         {
             var comments = await _commentRepo.GetDefaults(x => x.PostId == postId && x.IsActive);
             var dtos = comments.Select(p => _mapper.Map<CommentDto>(p)).ToList();
+            dtos=dtos.OrderByDescending(x=> x.PostedDate).ToList();
             return dtos;
         }
+
+        public async Task<List<CreateCommentDto>> GetAllComments()
+        {
+            var comments = await _commentRepo.GetDefaults(x => x.IsActive);
+            var dtos = comments.Select(p => _mapper.Map<CreateCommentDto>(p)).ToList();
+            return dtos;
+        }
+
 
     }
 }

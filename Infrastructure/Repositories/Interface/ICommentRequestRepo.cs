@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Interface
 {
-    public interface ICommentRepo : IBaseRepo<Comment>
+    public interface ICommentRequestRepo: IBaseRepo<CommentRequest>
     {
     }
 }

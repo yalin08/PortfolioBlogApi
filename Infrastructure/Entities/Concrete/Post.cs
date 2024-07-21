@@ -11,6 +11,7 @@ namespace Infrastructure.Entities.Concrete
     public class Post:BaseEntity
     {
         public string Title { get; set; }
+        public string ImageUrl { get; set; }
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
         public List<Comment>?  Comments { get; set; }

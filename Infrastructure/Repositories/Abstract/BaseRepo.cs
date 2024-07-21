@@ -43,7 +43,7 @@ namespace Infrastructure.Repositories.Abstract
                 return;
 
             entity.IsActive = false;
-            _context.Update<T>(entity);
+            _context.Update(entity);
             await _context.SaveChangesAsync();
         }
 
@@ -70,13 +70,16 @@ namespace Infrastructure.Repositories.Abstract
 
 
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
             if (entity == null)
-                return;
+                return null;
 
+            _context.Update(entity);
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return entity;
+         
         }
 
         public async Task<TResult> GetFilteredFirstOrDefault<TResult>(Expression<Func<T, TResult>> select, Expression<Func<T, bool>> where, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)

@@ -3,6 +3,7 @@ using AutoMapper;
 using Business.Dto.Comment;
 using Business.Dto.Post;
 using Business.Services.Interface;
+using Infrastructure.Entities.Concrete;
 using Infrastructure.Repositories.Concrete;
 using Infrastructure.Repositories.Interface;
 using Microsoft.AspNetCore.Authorization;
@@ -15,24 +16,40 @@ namespace PortfolioBlogApi.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly ICommentService _service;
+        private readonly ICommentService _commentService;
+        private readonly ICommentRequestService _commentRequestService;
 
-        public CommentController(ICommentService commentRepo)
+        public CommentController(ICommentService service, ICommentRequestService commentRequestService)
         {
-            _service = commentRepo;
+            _commentService = service;
+            _commentRequestService = commentRequestService;
         }
 
         [HttpPost("CreateComment")]
-        public async Task<IActionResult> CreateComment(CommentDto dto)
+        [Authorize]
+        public async Task<IActionResult> CreateComment(int id)
         {
-            await _service.CreateComment(dto);
-            return Ok(dto);
+            var request = await _commentRequestService.GetCommentRequest(id);
+            request.Id = 0;
+            await _commentService.CreateComment(request);
+
+            await _commentRequestService.DeleteCommentRequest(id);
+
+            return Ok(request);
         }
 
         [HttpGet("GetComment")]
         public async Task<List<CommentDto>> GetCommentByPostId(int postId)
         {
-          var dto=await  _service.GetCommentByPostId(postId);
+            var dto = await _commentService.GetCommentByPostId(postId);
+            return dto;
+        }
+
+        [HttpGet("GetAllComment")]
+        [Authorize]
+        public async Task<List<CreateCommentDto>> GetAllComments()
+        {
+            var dto = await _commentService.GetAllComments();
             return dto;
         }
 
@@ -40,15 +57,17 @@ namespace PortfolioBlogApi.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteComment(int id)
         {
-          bool success=  await _service.DeleteComment(id);
+            bool success = await _commentService.DeleteComment(id);
 
-            if(success)
+            if (success)
             {
                 return Ok("Deleted");
             }
             return BadRequest();
 
         }
+
+
 
 
     }

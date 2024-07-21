@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Entities.Concrete
 {
-    public class Comment:BaseEntity
+    public class CommentRequest:BaseEntity
     {
         public string Sender { get; set; }
         public string SenderIp { get; set; }
@@ -17,6 +17,5 @@ namespace Infrastructure.Entities.Concrete
 
         public int PostId { get; set; }
         public Post Post { get; set; }
-
     }
 }
