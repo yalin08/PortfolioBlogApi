@@ -4,7 +4,6 @@ using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using Business.IoC;
 using Infrastructure.Context;
-
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Autofac.Core;
+using Microsoft.Extensions.Configuration;
 
 namespace PortfolioBlogApi
 {
@@ -28,10 +28,15 @@ namespace PortfolioBlogApi
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+			//   builder.Services.AddDbContext<AppDbContext>(options =>
+			//  options.UseSqlServer(connectionString));
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>(o =>
+			
+
+			builder.Services.AddDbContext<AppDbContext>(options =>
+	options.UseMySQL(connectionString));
+
+			builder.Services.AddIdentity<AppUser, IdentityRole>(o =>
             {
                 o.SignIn.RequireConfirmedEmail = false;
                 o.SignIn.RequireConfirmedPhoneNumber = false;

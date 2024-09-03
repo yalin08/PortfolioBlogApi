@@ -15,8 +15,9 @@ namespace Infrastructure.Entities.Concrete
         public string Content { get; set; }
         public DateTime PostedDate { get; set; }
         public List<Comment>?  Comments { get; set; }
+        public List<CommentRequest>?  CommentRequests { get; set; }
 
-        public string? UserId { get; set; }
+		public string? UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public AppUser? AppUser { get; set; }
